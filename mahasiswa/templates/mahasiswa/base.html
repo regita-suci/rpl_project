@@ -1,0 +1,108 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}RPL Django{% endblock %}</title>
+
+```
+<link rel="stylesheet" href="{% static 'mahasiswa/css/style.css' %}">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+    }
+
+    header {
+        background-color: #2f69ad;
+        color: white;
+        padding: 40px 30px;
+    }
+
+    header h1 {
+        font-size: 48px;
+    }
+
+    nav {
+        background-color: #007bff;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .nav-user {
+        color: white;
+        font-size: 15px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+    main {
+        padding: 20px;
+        min-height: 70vh;
+    }
+
+    footer {
+        padding: 20px;
+        color: #333;
+    }
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>Praktikum RPL - Django</h1>
+</header>
+
+<nav>
+    {% if request.user.is_authenticated %}
+        <span class="nav-user">
+            Halo, {{ request.user.username }}!
+        </span>
+
+    <a href="{% url 'logout' %}">
+        Logout
+    </a>
+{% else %}
+    <a href="{% url 'login' %}">
+        Login
+    </a>
+{% endif %}
+
+</nav>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <p>&copy; 2025 - Praktikum</p>
+</footer>
+
+<script src="{% static 'mahasiswa/js/main.js' %}"></script>
+
+</body>
+</html>
