@@ -1,36 +1,59 @@
 {% extends 'mahasiswa/base.html' %}
-{% load static %}
 
 {% block content %}
 
-<h2>Daftar Mahasiswa</h2>
+<div class="container mt-4">
 
-<table border="1">
+    <h2>Daftar Mahasiswa</h2>
 
-    <tr>
-        <th>NIM</th>
-        <th>Nama</th>
-        <th>Program Studi</th>
-        <th>Angkatan</th>
-    </tr>
+    <a href="{% url 'tambah_mahasiswa' %}" class="btn btn-success mb-3">
+        + Tambah Mahasiswa
+    </a>
 
-    {% for mhs in mahasiswas %}
+    <table class="table table-bordered table-striped table-hover">
 
-    <tr>
-        <td>{{ mhs.nim }}</td>
-        <td>{{ mhs.nama }}</td>
-        <td>{{ mhs.programstudi }}</td>
-        <td>{{ mhs.angkatan }}</td>
-    </tr>
+        <thead class="table-dark">
+            <tr>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Program Studi</th>
+                <th>Angkatan</th>
+                <th width="180">Aksi</th>
+            </tr>
+        </thead>
 
-    {% empty %}
+        <tbody>
+        {% for mhs in mahasiswas %}
+            <tr>
+                <td>{{ mhs.nim }}</td>
+                <td>{{ mhs.nama }}</td>
+                <td>{{ mhs.programstudi }}</td>
+                <td>{{ mhs.angkatan }}</td>
 
-    <tr>
-        <td colspan="4">Belum ada data.</td>
-    </tr>
+                <td>
+                    <a href="{% url 'edit_mahasiswa' mhs.id %}"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
 
-    {% endfor %}
+                    <a href="{% url 'hapus_mahasiswa' mhs.id %}"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Yakin ingin menghapus data?')">
+                        Hapus
+                    </a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">
+                    Belum ada data mahasiswa
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
 
-</table>
+    </table>
+
+</div>
 
 {% endblock %}

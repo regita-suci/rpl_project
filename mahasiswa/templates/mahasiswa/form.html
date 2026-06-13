@@ -1,0 +1,69 @@
+{% extends 'mahasiswa/base.html' %}
+
+{% block content %}
+
+<h2>
+
+{% if mahasiswa %}
+Edit Mahasiswa
+{% else %}
+Tambah Mahasiswa
+{% endif %}
+
+</h2>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <p>
+        NIM
+        <br>
+        <input
+            type="text"
+            name="nim"
+            value="{{ mahasiswa.nim|default:'' }}"
+            required>
+    </p>
+
+    <p>
+        Nama
+        <br>
+        <input
+            type="text"
+            name="nama"
+            value="{{ mahasiswa.nama|default:'' }}"
+            required>
+    </p>
+
+    <p>
+        Program Studi
+        <br>
+        <input
+            type="text"
+            name="programstudi"
+            value="{{ mahasiswa.programstudi|default:'' }}"
+            required>
+    </p>
+
+    <p>
+        Angkatan
+        <br>
+        <input
+            type="number"
+            name="angkatan"
+            value="{{ mahasiswa.angkatan|default:'' }}"
+            required>
+    </p>
+
+    <button type="submit">
+        Simpan
+    </button>
+
+    <a href="{% url 'daftar_mahasiswa' %}">
+        Kembali
+    </a>
+
+</form>
+
+{% endblock %}
